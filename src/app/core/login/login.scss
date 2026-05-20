@@ -1,0 +1,14 @@
+.login-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+:host ::ng-deep .p-inputtext {
+    width: 100%;
+}
+
+.field {
+    padding: 14px 0;
+}

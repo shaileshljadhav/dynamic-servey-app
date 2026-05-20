@@ -1,0 +1,29 @@
+<div class="p-12">
+    <p-card header="Login" class="login-card" [style]="{ width: '350px' }">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="p-12">
+                <div class="field">
+                    <p-floatLabel>
+                        <input id="email" type="text" pInputText formControlName="email" class="w-full" />
+                        <label for="email">Email</label>
+                    </p-floatLabel>
+                    <!-- @if (loginForm.controls.email.touched() && loginForm.controls.email.errors()) {
+                    <span class="error">Email</span>
+                    } -->
+                </div>
+                
+                <div class="field">
+                    <p-floatLabel>
+                        <p-password id="password" formControlName="password" [feedback]="false" class="w-full" styleClass="w-full" />
+                        <label for="password">Password</label>
+                    </p-floatLabel>
+                    <!-- @if (loginForm.controls.password.touched() && loginForm.controls.password.errors()) {
+                    <span class="error">Pass</span>
+                    } -->
+                </div>
+
+                <p-button label="Sign In" type="submit" styleClass="w-full"></p-button>
+            </div>
+        </form>
+    </p-card>
+</div>
