@@ -3,7 +3,11 @@ import { Login } from './core/login/login';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: 'login', component: Login },
+    // { path: 'login', component: Login },
+    {
+      path: 'login',
+      loadComponent: () => import('./core/login/login').then(m => m.Login)
+    },
     {
       path: 'dashboard',
       loadComponent: () => import('./features/dashboard/dashboard').then(m => m.Dashboard)
