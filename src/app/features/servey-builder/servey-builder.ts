@@ -34,23 +34,23 @@ export class ServeyBuilder implements OnInit {
       questionsArray: this.fb.array([])
     });
 
-    this.addAddress();
+    this.addQuestion();
   }
 
   get questionsArray() {
     return this.serveyForm.get('questionsArray') as FormArray;
   }
 
-  addAddress() {
+  addQuestion() {
     const questionGroup = this.fb.group({
       question: ['', [Validators.required, Validators.minLength(2)]],
-      questionType: [null, Validators.required],
+      questionType: ['', Validators.required],
       optionsArray: this.fb.array([])
     });
     this.questionsArray.push(questionGroup);
   }
 
-  removeAddress(index: number) {
+  removeQuestion(index: number) {
     this.questionsArray.removeAt(index);
   }
 
@@ -75,6 +75,13 @@ export class ServeyBuilder implements OnInit {
   onQueTypeChange(e: any, qIndex: number) {
     if (e.value !== 'text') {
       this.addOption(qIndex);
+      this.addOption(qIndex);
+    } else {
+      // const outerArray = this.serveyForm.get('questionsArray') as FormArray;
+      // const innerFormGroup = outerArray.at(qIndex) as FormGroup;
+      // const innerArray = innerFormGroup.get('optionsArray') as FormArray;
+      const optArray = this.serveyForm.get('questionsArray.0.optionsArray') as FormArray;
+      optArray.clear();
     }
   }
 
