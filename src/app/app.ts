@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
+import { AuthService } from './core/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,13 @@ import { MenubarModule } from 'primeng/menubar';
 export class App implements OnInit {
   protected readonly title = signal('dynamic-servey-app');
   showHeader = false;
-  constructor(private router: Router) {
+  constructor(private router: Router,
+     private authService: AuthService
+  ) {
     this.router.events.subscribe((url: any) => {
       if (url.url !== undefined && url.url !== null) {
         const browserUrl = url.url.split('?');
-        if (browserUrl[0] === '/login') {
+        if (browserUrl[0] === '' || browserUrl[0] === '/' || browserUrl[0] === '/login') {
           this.showHeader = false;
         } else {
           this.showHeader = true;
@@ -43,5 +46,10 @@ export class App implements OnInit {
       //     icon: 'pi pi-envelope'
       // }
     ];
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

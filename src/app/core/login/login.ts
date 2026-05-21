@@ -31,6 +31,12 @@ export class Login implements OnInit {
   loginForm!: FormGroup;
 
   ngOnInit(): void {
+    if (!this.authService.isLoggedIn())
+      this.authService.logout();
+    else
+      this.router.navigate(['/dashboard']);
+
+    
     this.loginForm = new FormGroup({
       email: new FormControl('', [
         Validators.required,
