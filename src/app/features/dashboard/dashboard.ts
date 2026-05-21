@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
-import { Chart, registerables} from 'chart.js';
+import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
 @Component({
@@ -12,9 +12,12 @@ Chart.register(...registerables);
 export class Dashboard implements OnInit {
   basicData: any;
   basicOptions: any;
+  dataPieChart: any;
+  optionsPieChart: any
 
   ngOnInit() {
     this.initChart();
+    this.initPieChart();
   }
 
   initChart() {
@@ -63,6 +66,35 @@ export class Dashboard implements OnInit {
           },
           grid: {
             color: surfaceBorder
+          }
+        }
+      }
+    };
+    // }
+  }
+
+  initPieChart() {
+    // if (isPlatformBrowser(this.platformId)) {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+
+    this.dataPieChart = {
+      labels: ['A', 'B', 'C'],
+      datasets: [
+        {
+          data: [540, 325, 702],
+          backgroundColor: [documentStyle.getPropertyValue('--p-cyan-500'), documentStyle.getPropertyValue('--p-orange-500'), documentStyle.getPropertyValue('--p-gray-500')],
+          hoverBackgroundColor: [documentStyle.getPropertyValue('--p-cyan-400'), documentStyle.getPropertyValue('--p-orange-400'), documentStyle.getPropertyValue('--p-gray-400')]
+        }
+      ]
+    };
+
+    this.optionsPieChart = {
+      plugins: {
+        legend: {
+          labels: {
+            usePointStyle: true,
+            color: textColor
           }
         }
       }

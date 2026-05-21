@@ -1,9 +1,21 @@
 <!-- <p>dashboard works!</p> -->
 
 <div class="grid col-12 main-content">
-    <div class="col-6">
+  <div class="option-container">
+    <div style="width: 50%;">
+      <div class="col-12">
         <div class="card">
           <p-chart type="bar" [data]="basicData" [options]="basicOptions" />
         </div>
+      </div>
     </div>
+
+    <div style="width: 50%;">
+      <div class="col-12">
+        <div class="card">
+          <p-chart type="pie" [data]="dataPieChart" [options]="optionsPieChart" class="w-full md:w-[30rem]" />
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
