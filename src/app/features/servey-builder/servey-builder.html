@@ -1,21 +1,35 @@
 <!-- <p>servey-builder works!</p> -->
 
 <div class="grid col-12 main-content">
-    <div class="card form-container">
-      <h2>Servey Form</h2>
-      <form [formGroup]="serveyForm" (ngSubmit)="onSubmit()">
-        <div class="field pb-10">
-          <label for="question">Question</label>
-          <input id="question" type="text" pInputText formControlName="question" class="w-full" />
+  <div class="card form-container">
+    <h2>Servey Form</h2>
+    <form [formGroup]="serveyForm" (ngSubmit)="onSubmit()">
+      <div formArrayName="questionsArray">
+        @for (question of questionsArray.controls; track $index; let i = $index) {
+        <div [formGroupName]="i" class="col-12 question">
+          <div class="field pb-10">
+            <label for="question">Question</label>
+            <input id="question" type="text" pInputText formControlName="question" class="w-full" />
+          </div>
+          <div class="field pb-10">
+            <label for="questionType">Question Type</label>
+            <p-select id="questionType" formControlName="questionType" [options]="questionTypes" optionLabel="name"
+              styleClass="w-full"></p-select>
+          </div>
+          <div class="field pb-10">
+            <p-button label="Remove Question" icon="pi pi-trash" severity="danger" (onClick)="removeAddress(i)"></p-button>
+          </div>
         </div>
-        <div class="field pb-10">
-          <label for="questionType">Question Type</label>
-          <p-select id="questionType" formControlName="questionType" [options]="questionTypes" optionLabel="name" styleClass="w-full"></p-select>
-        </div>
+        }
+      </div>
 
-        <div class="field">
-            <p-button label="Submit" type="submit" [disabled]="serveyForm.invalid"></p-button>
-        </div>
-      </form>
-    </div>
+      <div class="field pt-10">
+        <p-button label="Add Question" icon="pi pi-plus" (onClick)="addAddress()" class="mr-2"></p-button>
+      </div>
+
+      <div class="field submit-btn">
+        <p-button label="Submit" type="submit" [disabled]="serveyForm.invalid"></p-button>
+      </div>
+    </form>
+  </div>
 </div>

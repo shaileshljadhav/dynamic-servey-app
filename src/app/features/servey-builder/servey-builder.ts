@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
@@ -25,15 +25,32 @@ export class ServeyBuilder implements OnInit {
 
   ngOnInit() {
     this.questionTypes = [
-      { name: 'Text', code: '1' },
-      { name: 'Multiple Choice ', code: '2' },
-      { name: 'Checkbox ', code: '3' }
+      { name: 'Text', code: 'text' },
+      { name: 'Multiple Choice ', code: 'mcq' },
+      { name: 'Checkbox ', code: 'checkbox' }
     ];
 
     this.serveyForm = this.fb.group({
+      questionsArray: this.fb.array([])
+    });
+
+    this.addAddress();
+  }
+
+  get questionsArray() {
+    return this.serveyForm.get('questionsArray') as FormArray;
+  }
+
+  addAddress() {
+    const questionGroup = this.fb.group({
       question: ['', [Validators.required, Validators.minLength(2)]],
       questionType: [null, Validators.required]
     });
+    this.questionsArray.push(questionGroup);
+  }
+
+  removeAddress(index: number) {
+    this.questionsArray.removeAt(index);
   }
 
   onSubmit() {
