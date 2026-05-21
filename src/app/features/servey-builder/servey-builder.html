@@ -1,1 +1,21 @@
-<p>servey-builder works!</p>
+<!-- <p>servey-builder works!</p> -->
+
+<div class="grid col-12 main-content">
+    <div class="card form-container">
+      <h2>Servey Form</h2>
+      <form [formGroup]="serveyForm" (ngSubmit)="onSubmit()">
+        <div class="field pb-10">
+          <label for="question">Question</label>
+          <input id="question" type="text" pInputText formControlName="question" class="w-full" />
+        </div>
+        <div class="field pb-10">
+          <label for="questionType">Question Type</label>
+          <p-select id="questionType" formControlName="questionType" [options]="questionTypes" optionLabel="name" styleClass="w-full"></p-select>
+        </div>
+
+        <div class="field">
+            <p-button label="Submit" type="submit" [disabled]="serveyForm.invalid"></p-button>
+        </div>
+      </form>
+    </div>
+</div>
