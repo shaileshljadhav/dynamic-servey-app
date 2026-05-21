@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
 
 body {
   background-color: #ddedf1;
@@ -28,4 +29,8 @@ body {
 
 .pb-10 {
   padding-bottom: 10px;
+}
+
+.text-end {
+  text-align: end;
 }

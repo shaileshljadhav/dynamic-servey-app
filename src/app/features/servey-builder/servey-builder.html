@@ -22,19 +22,30 @@
             <div [formGroupName]="j" class="col-12">
               <div class="field pb-10">
                 <label for="question">Option</label>
-                <div>
-                <input id="question" type="text" pInputText formControlName="option" class="w-full" />
-                <p-button class="pt-10" label="Remove Option" icon="pi pi-times" severity="danger" (onClick)="removeOption(i, j)">
-                </p-button>
+                <div class="option-container">
+                  <div style="width: 80%;">
+                    <input id="question" type="text" pInputText formControlName="option" class="w-full" />
+                  </div>
+                  <div style="width: 20%;">
+                    @if (j === getOptionsArray(i).controls.length - 1) {
+                    <p-button icon="pi pi-plus" (onClick)="addOption(i)"></p-button>&nbsp;
+                    }
+                    @if (j > 1) {
+                    <p-button class="pt-10" icon="pi pi-times" severity="danger" (onClick)="removeOption(i, j)">
+                    </p-button>
+                    }
+                  </div>
                 </div>
               </div>
             </div>
             }
           </div>
 
-          <div class="field pb-10">
+          <div class="field text-end pb-10">
+            @if (i > 0) {
             <p-button label="Remove Question" icon="pi pi-trash" severity="danger" (onClick)="removeAddress(i)">
             </p-button>
+            }
           </div>
         </div>
         }

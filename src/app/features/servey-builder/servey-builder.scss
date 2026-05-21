@@ -10,3 +10,12 @@
   padding: 10px;
   margin: 5px 0;
 }
+
+.option-container {
+  display: flex;
+  justify-content: center;
+}
+
+.option-container div {
+  text-align: center;
+}

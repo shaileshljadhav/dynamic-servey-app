@@ -73,7 +73,6 @@ export class ServeyBuilder implements OnInit {
   }
 
   onQueTypeChange(e: any, qIndex: number) {
-    console.log(e)
     if (e.value !== 'text') {
       this.addOption(qIndex);
     }
