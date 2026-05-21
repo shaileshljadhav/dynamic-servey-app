@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
@@ -45,7 +45,7 @@ export class ServeyBuilder implements OnInit {
     const questionGroup = this.fb.group({
       question: ['', [Validators.required, Validators.minLength(3)]],
       questionType: ['', Validators.required],
-      optionsArray: this.fb.array([])
+      optionsArray: this.fb.array([], this.uniqueOptionsValidator())
     });
     this.questionsArray.push(questionGroup);
   }
@@ -94,4 +94,26 @@ export class ServeyBuilder implements OnInit {
   onReset() {
     this.serveyForm.reset();
   }
+
+  uniqueOptionsValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+
+    const formArray = control as FormArray;
+
+    if (!formArray || !formArray.controls) {
+      return null;
+    }
+
+    const options = formArray.controls
+      .map(ctrl => ctrl.get('option')?.value?.trim().toLowerCase())
+      .filter(value => value);
+
+    const hasDuplicate =
+      options.length !== new Set(options).size;
+
+    return hasDuplicate
+      ? { duplicateOptions: true }
+      : null;
+  };
+}
 }

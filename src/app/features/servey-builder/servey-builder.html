@@ -40,6 +40,11 @@
                       Option is required.
                     </small>
                     }
+                    @if (opt.get('option')?.hasError('duplicateOptions') && opt.get('option')?.invalid && opt.get('option')?.touched) {
+                    <small class="p-error">
+                      Duplicate options are not allowed
+                    </small>
+                    }
                   </div>
                   <div style="width: 20%;">
                     @if (j === getOptionsArray(i).controls.length - 1) {
