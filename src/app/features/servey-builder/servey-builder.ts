@@ -44,13 +44,39 @@ export class ServeyBuilder implements OnInit {
   addAddress() {
     const questionGroup = this.fb.group({
       question: ['', [Validators.required, Validators.minLength(2)]],
-      questionType: [null, Validators.required]
+      questionType: [null, Validators.required],
+      optionsArray: this.fb.array([])
     });
     this.questionsArray.push(questionGroup);
   }
 
   removeAddress(index: number) {
     this.questionsArray.removeAt(index);
+  }
+
+  createOptionGroup(): FormGroup {
+    return this.fb.group({
+      option: ['', Validators.required]
+    });
+  }
+
+  getOptionsArray(qIndex: number): FormArray {
+    return this.questionsArray.at(qIndex).get('optionsArray') as FormArray;
+  }
+
+  addOption(qIndex: number): void {
+    this.getOptionsArray(qIndex).push(this.createOptionGroup());
+  }
+
+  removeOption(qIndex: number, oIndex: number): void {
+    this.getOptionsArray(qIndex).removeAt(oIndex);
+  }
+
+  onQueTypeChange(e: any, qIndex: number) {
+    console.log(e)
+    if (e.value !== 'text') {
+      this.addOption(qIndex);
+    }
   }
 
   onSubmit() {

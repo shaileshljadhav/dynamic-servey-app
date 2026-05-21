@@ -14,10 +14,27 @@
           <div class="field pb-10">
             <label for="questionType">Question Type</label>
             <p-select id="questionType" formControlName="questionType" [options]="questionTypes" optionLabel="name"
-              styleClass="w-full"></p-select>
+              optionValue="code" styleClass="w-full" (onChange)="onQueTypeChange($event, i)"></p-select>
           </div>
+
+          <div formArrayName="optionsArray">
+            @for (opt of getOptionsArray(i).controls; track opt; let j = $index) {
+            <div [formGroupName]="j" class="col-12">
+              <div class="field pb-10">
+                <label for="question">Option</label>
+                <div>
+                <input id="question" type="text" pInputText formControlName="option" class="w-full" />
+                <p-button class="pt-10" label="Remove Option" icon="pi pi-times" severity="danger" (onClick)="removeOption(i, j)">
+                </p-button>
+                </div>
+              </div>
+            </div>
+            }
+          </div>
+
           <div class="field pb-10">
-            <p-button label="Remove Question" icon="pi pi-trash" severity="danger" (onClick)="removeAddress(i)"></p-button>
+            <p-button label="Remove Question" icon="pi pi-trash" severity="danger" (onClick)="removeAddress(i)">
+            </p-button>
           </div>
         </div>
         }
