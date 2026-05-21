@@ -5,6 +5,7 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({ 
@@ -15,7 +16,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 })
 export class Login implements OnInit{
 
-  constructor(){  }
+  constructor(private router: Router){  }
 
   loginForm!: FormGroup;
 
@@ -33,6 +34,7 @@ export class Login implements OnInit{
   }
 
   onSubmit(): void {
+    this.router.navigate(['/dashboard']);
     if (this.loginForm.valid) {
       console.log('Login Data:', this.loginForm.value);
       // Implement your authentication API service call here

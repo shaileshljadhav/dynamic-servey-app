@@ -31,11 +31,12 @@ export class App implements OnInit {
     this.items = [
       {
         label: 'Dashboard',
-        icon: 'pi pi-home'
+        // icon: 'pi pi-home',
+        routerLink: ['/dashboard'] 
       },
       {
         label: 'Servey Builder',
-        icon: 'pi pi-star'
+        routerLink: ['/servey'] 
       },
       // {
       //     label: 'Contact',
