@@ -1,9 +1,11 @@
 <!-- <router-outlet /> -->
-<!-- <header class="fixed-header">
-  <div class="card">
-    <p-menubar [model]="items" />
-  </div>
-</header> -->
+ @if(showHeader) {
+   <header class="fixed-header">
+     <div class="card">
+       <p-menubar [model]="items" />
+     </div>
+   </header>
+ }
 
 <main class="content-section">
   <router-outlet></router-outlet>

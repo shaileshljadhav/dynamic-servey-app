@@ -11,8 +11,18 @@ import { MenubarModule } from 'primeng/menubar';
 })
 export class App implements OnInit {
   protected readonly title = signal('dynamic-servey-app');
+  showHeader = false;
   constructor(private router: Router) {
-    console.log(this.router.url);
+    this.router.events.subscribe((url: any) => {
+      if (url.url !== undefined && url.url !== null) {
+        const browserUrl = url.url.split('?');
+        if (browserUrl[0] === '/login') {
+          this.showHeader = false;
+        } else {
+          this.showHeader = true;
+        }
+      }
+    });
   }
 
   items: MenuItem[] | undefined;
