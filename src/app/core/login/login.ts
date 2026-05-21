@@ -24,11 +24,10 @@ import { AuthService } from '../auth/auth.service';
 })
 export class Login implements OnInit {
 
+  loginForm!: FormGroup;
   constructor(private router: Router,
     private authService: AuthService
   ) { }
-
-  loginForm!: FormGroup;
 
   ngOnInit(): void {
     if (!this.authService.isLoggedIn())

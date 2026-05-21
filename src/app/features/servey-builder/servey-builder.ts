@@ -43,7 +43,7 @@ export class ServeyBuilder implements OnInit {
 
   addQuestion() {
     const questionGroup = this.fb.group({
-      question: ['', [Validators.required, Validators.minLength(2)]],
+      question: ['', [Validators.required, Validators.minLength(3)]],
       questionType: ['', Validators.required],
       optionsArray: this.fb.array([])
     });

@@ -7,9 +7,9 @@
                         <input id="email" type="text" pInputText formControlName="email" class="w-full" />
                         <label for="email">Email</label>
                     </p-floatLabel>
-                    <!-- @if (loginForm.controls.email.touched() && loginForm.controls.email.errors()) {
-                    <span class="error">Email</span>
-                    } -->
+                    @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+                    <span class="p-error">Email is required.</span>
+                    }
                 </div>
                 
                 <div class="field">
@@ -17,9 +17,9 @@
                         <p-password id="password" formControlName="password" [feedback]="false" class="w-full" styleClass="w-full" />
                         <label for="password">Password</label>
                     </p-floatLabel>
-                    <!-- @if (loginForm.controls.password.touched() && loginForm.controls.password.errors()) {
-                    <span class="error">Pass</span>
-                    } -->
+                    @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+                    <span class="p-error">Password is required (min 6 characters).</span>
+                    }
                 </div>
 
                 <p-button label="Sign In" type="submit" styleClass="w-full"></p-button>
