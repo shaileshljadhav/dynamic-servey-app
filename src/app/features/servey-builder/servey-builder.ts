@@ -90,4 +90,8 @@ export class ServeyBuilder implements OnInit {
       console.log('Form Submitted:', this.serveyForm.value);
     }
   }
+
+  onReset() {
+    this.serveyForm.reset();
+  }
 }
