@@ -34,6 +34,7 @@ export class ServeyBuilder implements OnInit {
     ];
 
     this.serveyForm = this.fb.group({
+      formName: ['', [Validators.required, Validators.minLength(3)]],
       questionsArray: this.fb.array([])
     });
 

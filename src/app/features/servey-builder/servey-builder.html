@@ -4,6 +4,17 @@
   <div class="card form-container">
     <h2>Servey Form</h2>
     <form [formGroup]="serveyForm" (ngSubmit)="onSubmit()">
+      <div class="col-12">
+        <div class="field pb-10">
+          <label for="formName">Form Name</label>
+          <input id="formName" type="text" pInputText formControlName="formName" class="w-full" />
+          @if (serveyForm.get('formName')?.invalid && serveyForm.get('formName')?.touched) {
+          <small class="p-error">
+            Form name is required (min 3 characters).
+          </small>
+          }
+        </div>
+      </div>
       <div formArrayName="questionsArray">
         @for (question of questionsArray.controls; track question; let i = $index) {
         <div [formGroupName]="i" class="col-12 question">
