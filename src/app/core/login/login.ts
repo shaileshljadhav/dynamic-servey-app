@@ -48,46 +48,46 @@ export class Login implements OnInit {
     });
   }
 
-  // onSubmit(): void {
-  //   // this.router.navigate(['/dashboard']);
-  //   if (this.loginForm.valid) {
-  //     console.log('Login Data:', this.loginForm.value);
-  //     this.authService.login(this.loginForm.value).subscribe({
-  //     next: (res: any) => {
-  //       console.log(res);
-  //       // Example: Save token to local storage and redirect
-  //       localStorage.setItem('authToken', res.token);
-  //       this.router.navigate(['/dashboard']);
-  //     },
-  //     error: (err: any) => {
-  //       // Example: Capture and display backend error message
-  //       console.log(err.error.message || 'Login failed. Please try again.');
-  //     }
-  //     });
-  //   }
-  // }
-
   onSubmit(): void {
-
-    const payload = this.loginForm.value;
-
-    this.authService.login(payload)
-      .subscribe({
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      this.authService.loginUser(email, password).subscribe({
         next: (response) => {
-
-          console.log(response);
-
-          sessionStorage.setItem(
-            'token',
-            response.token
-          );
-
-          this.router.navigate(['/dashboard']);
+          // console.log('User exists!:', response);
+          if (response.length > 0) {
+            sessionStorage.setItem('token', response.token);
+  
+            this.router.navigate(['/dashboard']);
+          }
         },
-
         error: (err) => {
-          console.log(err);
+          console.error('Request failed:', err);
         }
       });
+    }
   }
+
+  // onSubmit(): void {
+
+  //   const payload = this.loginForm.value;
+
+  //   this.authService.login(payload)
+  //     .subscribe({
+  //       next: (response) => {
+
+  //         console.log(response);
+
+  //         sessionStorage.setItem(
+  //           'token',
+  //           response.token
+  //         );
+
+  //         this.router.navigate(['/dashboard']);
+  //       },
+
+  //       error: (err) => {
+  //         console.log(err);
+  //       }
+  //     });
+  // }
 }

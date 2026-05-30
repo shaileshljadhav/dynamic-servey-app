@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@example.com",
+      "password": "admin1234",
+      "name": "Admin",
+      "role": "Admin",
+      "token": "mock-admin-jwt-token"
+    },
+    {
+      "id": "2",
+      "email": "johndoe@example.com",
+      "password": "pass1234",
+      "name": "John Doe",
+      "role": "staff",
+      "token": "mock-user-jwt-token"
+    }
+  ]
+}

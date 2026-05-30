@@ -16,6 +16,8 @@ export class AuthService {
     !!this.currentUser()
   );
 
+  private apiUrl = 'http://localhost:3000/users';
+
   constructor(private http: HttpClient) {
     // this.restoreSession();
   }
@@ -96,4 +98,8 @@ export class AuthService {
   //     });
   //   }
   // }
+
+  loginUser(email: any, password: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}?email=${email}&password=${password}`);
+  }
 }
