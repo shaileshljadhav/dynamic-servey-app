@@ -4,6 +4,7 @@ import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
+import { Servey } from '../../core/services/servey';
 
 @Component({
   selector: 'app-servey-builder',
@@ -21,7 +22,9 @@ export class ServeyBuilder implements OnInit {
   serveyForm!: FormGroup;
   questionTypes: any[] = [];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private serveyService: Servey
+  ) { }
 
   ngOnInit() {
     this.questionTypes = [
@@ -35,6 +38,15 @@ export class ServeyBuilder implements OnInit {
     });
 
     this.addQuestion();
+
+    this.serveyService.getForms().subscribe({
+      next: (response) => {
+        console.log('All forms list: ', response);
+      },
+      error: (err) => {
+        console.error('Request failed:', err);
+      }
+    });
   }
 
   get questionsArray() {
@@ -87,7 +99,18 @@ export class ServeyBuilder implements OnInit {
 
   onSubmit() {
     if (this.serveyForm.valid) {
-      console.log('Form Submitted:', this.serveyForm.value);
+      // console.log('Form Submitted:', this.serveyForm.value);
+
+      // Subscribing triggers the HTTP execution request
+      this.serveyService.addForm(this.serveyForm.value).subscribe({
+        next: (response) => {
+          console.log('JSON database successfully modified on disk!', response);
+          this.onReset();
+        },
+        error: (err) => {
+          console.error('Request failed:', err);
+        }
+      });
     }
   }
 
