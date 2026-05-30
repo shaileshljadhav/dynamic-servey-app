@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { Servey } from '../../../core/services/servey';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-servey-builder',
@@ -23,7 +24,8 @@ export class ServeyBuilder implements OnInit {
   questionTypes: any[] = [];
 
   constructor(private fb: FormBuilder,
-    private serveyService: Servey
+    private serveyService: Servey,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -107,6 +109,7 @@ export class ServeyBuilder implements OnInit {
         next: (response) => {
           console.log('JSON database successfully modified on disk!', response);
           this.onReset();
+          this.goBack();
         },
         error: (err) => {
           console.error('Request failed:', err);
@@ -117,6 +120,10 @@ export class ServeyBuilder implements OnInit {
 
   onReset() {
     this.serveyForm.reset();
+  }
+
+  goBack() {
+    this.router.navigate(['/servey']); 
   }
 
   uniqueOptionsValidator(): ValidatorFn {

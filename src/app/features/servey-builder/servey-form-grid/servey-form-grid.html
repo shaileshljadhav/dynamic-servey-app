@@ -1,0 +1,22 @@
+<div class="grid col-12 main-content">
+  <div class="col-12 pb-10 text-end">
+    <p-button label="New Form" severity="primary" (onClick)="onNewForm()"></p-button>
+  </div>
+  <div class="card form-container">
+    <p-table [value]="forms" [paginator]="true" [rows]="5" [tableStyle]="{ 'min-width': '50rem' }"
+      [rowsPerPageOptions]="[5, 10, 20]">
+      <ng-template #header>
+        <tr>
+          <th style="width:25%">Form Name</th>
+          <th style="width:25%">ID</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-forms>
+        <tr>
+          <td>{{ forms.formName }}</td>
+          <td>{{ forms.id }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

@@ -30,6 +30,29 @@
         }
       ],
       "id": 1
+    },
+    {
+      "formName": "User Form",
+      "questionsArray": [
+        {
+          "question": "User Name",
+          "questionType": "text",
+          "optionsArray": []
+        },
+        {
+          "question": "User Type",
+          "questionType": "mcq",
+          "optionsArray": [
+            {
+              "option": "Admin"
+            },
+            {
+              "option": "Staff"
+            }
+          ]
+        }
+      ],
+      "id": 2
     }
   ],
   "comments": [

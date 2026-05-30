@@ -17,6 +17,11 @@ export const routes: Routes = [
   {
     path: 'servey',
     canActivate: [authGuard],
+    loadComponent: () => import('./features/servey-builder/servey-form-grid/servey-form-grid').then(m => m.ServeyFormGrid)
+  },
+  {
+    path: 'servey/add-form',
+    canActivate: [authGuard],
     loadComponent: () => import('./features/servey-builder/servey-form/servey-builder').then(m => m.ServeyBuilder)
   },
   { path: '**', component: Login } 
