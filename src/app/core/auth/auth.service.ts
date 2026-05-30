@@ -22,28 +22,9 @@ export class AuthService {
     // this.restoreSession();
   }
 
-  // login(payload: LoginRequest) {
-  //   console.log(payload)
-  //   return this.http.post<AuthResponse>(
-  //     '/api/login',
-  //     payload
-  //   ).pipe(
-  //     tap((response) => {
-
-  //       sessionStorage.setItem(
-  //         this.tokenKey,
-  //         response.token
-  //       );
-
-  //       sessionStorage.setItem(
-  //         'role',
-  //         response.role
-  //       );
-
-  //       this.currentUser.set(response);
-  //     })
-  //   );
-  // }
+  loginUser(email: any, password: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}?email=${email}&password=${password}`);
+  }
 
   login(payload: LoginRequest): Observable<AuthResponse> {
 
@@ -99,7 +80,4 @@ export class AuthService {
   //   }
   // }
 
-  loginUser(email: any, password: any): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}?email=${email}&password=${password}`);
-  }
 }
