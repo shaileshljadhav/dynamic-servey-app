@@ -107,7 +107,7 @@ export class ServeyBuilder implements OnInit {
       // Subscribing triggers the HTTP execution request
       this.serveyService.addForm(this.serveyForm.value).subscribe({
         next: (response) => {
-          console.log('JSON database successfully modified on disk!', response);
+          // console.log('JSON database successfully modified on disk!', response);
           this.onReset();
           this.goBack();
         },
