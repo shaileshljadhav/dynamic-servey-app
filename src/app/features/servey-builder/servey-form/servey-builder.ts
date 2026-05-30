@@ -4,7 +4,7 @@ import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
-import { Servey } from '../../core/services/servey';
+import { Servey } from '../../../core/services/servey';
 
 @Component({
   selector: 'app-servey-builder',
