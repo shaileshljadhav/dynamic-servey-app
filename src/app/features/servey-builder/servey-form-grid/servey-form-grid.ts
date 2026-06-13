@@ -41,4 +41,18 @@ export class ServeyFormGrid implements OnInit {
     this.router.navigate(['/servey/add-form']); 
   }
 
+  viewForm(form: any): void {
+    console.log('View Form:', form);
+
+    // Example navigation
+    // this.router.navigate(['/form-details', form.id]);
+  }
+
+  editForm(form: any): void {
+    console.log('Edit Form:', form);
+
+    // Example navigation
+    this.router.navigate(['/servey/add-form', { id: form.id }]);
+  }
+
 }
